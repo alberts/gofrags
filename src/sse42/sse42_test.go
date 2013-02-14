@@ -46,6 +46,22 @@ func BenchmarkBytesEqual32K(b *testing.B) { benchmarkEqual(b, bytes.Equal, size3
 func BenchmarkBytesEqual1M(b *testing.B)  { benchmarkEqual(b, bytes.Equal, size1M) }
 func BenchmarkBytesEqual1G(b *testing.B)  { benchmarkEqual(b, bytes.Equal, size1G) }
 
+func BenchmarkRuntimeMemequal1K(b *testing.B) {
+	var b1 [size1K]byte
+	var b2 [size1K]byte
+	for i := 0; i < len(b1); i++ {
+		b1[i] = 'a'
+		b2[i] = 'a'
+	}
+	b.SetBytes(int64(len(b1)))
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		if b1 != b2 {
+			panic("failed")
+		}
+	}
+}
+
 func BenchmarkStringEqual1M(b *testing.B) {
 	s1 := string(make([]byte, size1M))
 	s2 := string(make([]byte, size1M))
