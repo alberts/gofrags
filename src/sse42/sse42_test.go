@@ -46,7 +46,7 @@ func BenchmarkBytesEqual32K(b *testing.B) { benchmarkEqual(b, bytes.Equal, size3
 func BenchmarkBytesEqual1M(b *testing.B)  { benchmarkEqual(b, bytes.Equal, size1M) }
 func BenchmarkBytesEqual1G(b *testing.B)  { benchmarkEqual(b, bytes.Equal, size1G) }
 
-func BenchmarkStringEqual(b *testing.B) {
+func BenchmarkStringEqual1M(b *testing.B) {
 	s1 := string(make([]byte, size1M))
 	s2 := string(make([]byte, size1M))
 	b.SetBytes(int64(len(s1)))
