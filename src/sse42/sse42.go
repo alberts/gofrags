@@ -36,3 +36,19 @@ func Memchr(s []byte, c byte) int {
 	}
 	return int(uintptr(p) - uintptr(s0))
 }
+
+func builtinCopy(dst, src []byte) int {
+	return copy(dst, src)
+}
+
+func Memmove(dst, src []byte) int {
+	n := len(dst)
+	if len(src) < len(dst) {
+		n = len(src)
+	}
+	if n == 0 {
+		return 0
+	}
+	C.memmove(unsafe.Pointer(&dst[0]), unsafe.Pointer(&src[0]), C.size_t(n))
+	return n
+}

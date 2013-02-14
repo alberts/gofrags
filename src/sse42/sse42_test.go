@@ -101,3 +101,31 @@ func BenchmarkMemchr1K(b *testing.B)  { benchmarkIndexByte(b, Memchr, size1K) }
 func BenchmarkMemchr32K(b *testing.B) { benchmarkIndexByte(b, Memchr, size32K) }
 func BenchmarkMemchr1M(b *testing.B)  { benchmarkIndexByte(b, Memchr, size1M) }
 func BenchmarkMemchr1G(b *testing.B)  { benchmarkIndexByte(b, Memchr, size1G) }
+
+type copyFunc func([]byte, []byte) int
+
+func benchmarkCopy(b *testing.B, mycopy copyFunc, size int) {
+	b1 := make([]byte, size)
+	b2 := make([]byte, size)
+	for i := 0; i < len(b1); i++ {
+		b1[i] = 'a'
+		b2[i] = 'a'
+	}
+	b.SetBytes(int64(len(b1)))
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		if mycopy(b1, b2) != size {
+			panic("failed")
+		}
+	}
+}
+
+func BenchmarkMemmove1K(b *testing.B)  { benchmarkCopy(b, Memmove, size1K) }
+func BenchmarkMemmove32K(b *testing.B) { benchmarkCopy(b, Memmove, size32K) }
+func BenchmarkMemmove1M(b *testing.B)  { benchmarkCopy(b, Memmove, size1M) }
+func BenchmarkMemmove1G(b *testing.B)  { benchmarkCopy(b, Memmove, size1G) }
+
+func BenchmarkRuntimeMemmove1K(b *testing.B)  { benchmarkCopy(b, builtinCopy, size1K) }
+func BenchmarkRuntimeMemmove32K(b *testing.B) { benchmarkCopy(b, builtinCopy, size32K) }
+func BenchmarkRuntimeMemmove1M(b *testing.B)  { benchmarkCopy(b, builtinCopy, size1M) }
+func BenchmarkRuntimeMemmove1G(b *testing.B)  { benchmarkCopy(b, builtinCopy, size1G) }
