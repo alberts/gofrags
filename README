@@ -1,0 +1,5 @@
+marvel at http://repo.or.cz/w/glibc.git/tree/HEAD:/sysdeps/x86_64/multiarch
+
+sudo cpupower frequency-set -g performance
+
+./build.sh
