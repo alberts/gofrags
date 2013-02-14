@@ -29,6 +29,8 @@ func benchmarkEqual(b *testing.B, equal equalFunc, size int) {
 }
 
 func BenchmarkMemcmp1(b *testing.B)   { benchmarkEqual(b, Memcmp, 1) }
+func BenchmarkMemcmp256(b *testing.B) { benchmarkEqual(b, Memcmp, 256) }
+func BenchmarkMemcmp512(b *testing.B) { benchmarkEqual(b, Memcmp, 512) }
 func BenchmarkMemcmp1K(b *testing.B)  { benchmarkEqual(b, Memcmp, size1K) }
 func BenchmarkMemcmp32K(b *testing.B) { benchmarkEqual(b, Memcmp, size32K) }
 func BenchmarkMemcmp1M(b *testing.B)  { benchmarkEqual(b, Memcmp, size1M) }
