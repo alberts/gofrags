@@ -6,8 +6,16 @@ import (
 )
 
 const size1K = 1 << 10
-const size32K = 1 << 15
+const size32K = 32 << 10
+const size64K = 64 << 10
+const size128K = 128 << 10
+const size256K = 256 << 10
+const size512K = 512 << 10
 const size1M = 1 << 20
+const size2M = 2 << 20
+const size4M = 4 << 20
+const size8M = 8 << 20
+const size16M = 16 << 20
 const size1G = 1 << 30
 
 type equalFunc func([]byte, []byte) bool
@@ -37,6 +45,10 @@ func BenchmarkMemcmp512(b *testing.B) { benchmarkEqual(b, Memcmp, 512) }
 func BenchmarkMemcmp1K(b *testing.B)  { benchmarkEqual(b, Memcmp, size1K) }
 func BenchmarkMemcmp32K(b *testing.B) { benchmarkEqual(b, Memcmp, size32K) }
 func BenchmarkMemcmp1M(b *testing.B)  { benchmarkEqual(b, Memcmp, size1M) }
+func BenchmarkMemcmp2M(b *testing.B)  { benchmarkEqual(b, Memcmp, size2M) }
+func BenchmarkMemcmp4M(b *testing.B)  { benchmarkEqual(b, Memcmp, size4M) }
+func BenchmarkMemcmp8M(b *testing.B)  { benchmarkEqual(b, Memcmp, size8M) }
+func BenchmarkMemcmp16M(b *testing.B)  { benchmarkEqual(b, Memcmp, size16M) }
 func BenchmarkMemcmp1G(b *testing.B)  { benchmarkEqual(b, Memcmp, size1G) }
 
 func BenchmarkStrncmp1(b *testing.B)   { benchmarkEqual(b, Strncmp, 1) }
@@ -48,6 +60,10 @@ func BenchmarkStrncmp1G(b *testing.B)  { benchmarkEqual(b, Strncmp, size1G) }
 func BenchmarkBytesEqual1(b *testing.B)   { benchmarkEqual(b, bytes.Equal, 1) }
 func BenchmarkBytesEqual1K(b *testing.B)  { benchmarkEqual(b, bytes.Equal, size1K) }
 func BenchmarkBytesEqual32K(b *testing.B) { benchmarkEqual(b, bytes.Equal, size32K) }
+func BenchmarkBytesEqual64K(b *testing.B) { benchmarkEqual(b, bytes.Equal, size64K) }
+func BenchmarkBytesEqual128K(b *testing.B) { benchmarkEqual(b, bytes.Equal, size128K) }
+func BenchmarkBytesEqual256K(b *testing.B) { benchmarkEqual(b, bytes.Equal, size256K) }
+func BenchmarkBytesEqual512K(b *testing.B) { benchmarkEqual(b, bytes.Equal, size512K) }
 func BenchmarkBytesEqual1M(b *testing.B)  { benchmarkEqual(b, bytes.Equal, size1M) }
 func BenchmarkBytesEqual1G(b *testing.B)  { benchmarkEqual(b, bytes.Equal, size1G) }
 
