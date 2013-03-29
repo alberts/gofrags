@@ -67,6 +67,22 @@ func BenchmarkRuntimeMemequal1K(b *testing.B) {
 	}
 }
 
+func BenchmarkRuntimeMemequal1M(b *testing.B) {
+	var b1 [size1M]byte
+	var b2 [size1M]byte
+	for i := 0; i < len(b1); i++ {
+		b1[i] = 'a'
+		b2[i] = 'a'
+	}
+	b.SetBytes(int64(len(b1)))
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		if b1 != b2 {
+			panic("failed")
+		}
+	}
+}
+
 var b1arr = new([size1G]byte)
 var b2arr = new([size1G]byte)
 
