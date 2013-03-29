@@ -12,9 +12,12 @@ const size1G = 1 << 30
 
 type equalFunc func([]byte, []byte) bool
 
+var buf1 = make([]byte, 1<<30)
+var buf2 = make([]byte, 1<<30)
+
 func benchmarkEqual(b *testing.B, equal equalFunc, size int) {
-	b1 := make([]byte, size)
-	b2 := make([]byte, size)
+	b1 := buf1[:size]
+	b2 := buf2[:size]
 	for i := 0; i < len(b1); i++ {
 		b1[i] = 'a'
 		b2[i] = 'a'
@@ -64,6 +67,26 @@ func BenchmarkRuntimeMemequal1K(b *testing.B) {
 	}
 }
 
+var b1arr = new([size1G]byte)
+var b2arr = new([size1G]byte)
+
+func init() {
+	for i := 0; i < len(b1arr); i++ {
+		b1arr[i] = 'a'
+		b2arr[i] = 'a'
+	}
+}
+
+func BenchmarkRuntimeMemequal1G(b *testing.B) {
+	b.SetBytes(int64(len(b1arr)))
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		if *b1arr != *b2arr {
+			panic("failed")
+		}
+	}
+}
+
 func BenchmarkStringEqual1M(b *testing.B) {
 	s1 := string(make([]byte, size1M))
 	s2 := string(make([]byte, size1M))
@@ -79,7 +102,7 @@ func BenchmarkStringEqual1M(b *testing.B) {
 type indexByteFunc func([]byte, byte) int
 
 func benchmarkIndexByte(b *testing.B, indexByte indexByteFunc, size int) {
-	b1 := make([]byte, size)
+	b1 := buf1[:size]
 	for i := 0; i < len(b1); i++ {
 		b1[i] = 'a'
 	}
@@ -105,8 +128,8 @@ func BenchmarkMemchr1G(b *testing.B)  { benchmarkIndexByte(b, Memchr, size1G) }
 type copyFunc func([]byte, []byte) int
 
 func benchmarkCopy(b *testing.B, mycopy copyFunc, size int) {
-	b1 := make([]byte, size)
-	b2 := make([]byte, size)
+	b1 := buf1[:size]
+	b2 := buf2[:size]
 	for i := 0; i < len(b1); i++ {
 		b1[i] = 'a'
 		b2[i] = 'a'
