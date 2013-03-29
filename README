@@ -1,5 +1,7 @@
 marvel at http://repo.or.cz/w/glibc.git/tree/HEAD:/sysdeps/x86_64/multiarch
 
+marvel at https://codereview.appspot.com/8056043/
+
 sudo cpupower frequency-set -g performance
 
 ./build.sh
