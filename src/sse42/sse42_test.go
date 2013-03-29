@@ -39,17 +39,21 @@ func benchmarkEqual(b *testing.B, equal equalFunc, size int) {
 	}
 }
 
-func BenchmarkMemcmp1(b *testing.B)   { benchmarkEqual(b, Memcmp, 1) }
-func BenchmarkMemcmp256(b *testing.B) { benchmarkEqual(b, Memcmp, 256) }
-func BenchmarkMemcmp512(b *testing.B) { benchmarkEqual(b, Memcmp, 512) }
-func BenchmarkMemcmp1K(b *testing.B)  { benchmarkEqual(b, Memcmp, size1K) }
-func BenchmarkMemcmp32K(b *testing.B) { benchmarkEqual(b, Memcmp, size32K) }
-func BenchmarkMemcmp1M(b *testing.B)  { benchmarkEqual(b, Memcmp, size1M) }
-func BenchmarkMemcmp2M(b *testing.B)  { benchmarkEqual(b, Memcmp, size2M) }
-func BenchmarkMemcmp4M(b *testing.B)  { benchmarkEqual(b, Memcmp, size4M) }
-func BenchmarkMemcmp8M(b *testing.B)  { benchmarkEqual(b, Memcmp, size8M) }
+func BenchmarkMemcmp1(b *testing.B)    { benchmarkEqual(b, Memcmp, 1) }
+func BenchmarkMemcmp256(b *testing.B)  { benchmarkEqual(b, Memcmp, 256) }
+func BenchmarkMemcmp512(b *testing.B)  { benchmarkEqual(b, Memcmp, 512) }
+func BenchmarkMemcmp1K(b *testing.B)   { benchmarkEqual(b, Memcmp, size1K) }
+func BenchmarkMemcmp32K(b *testing.B)  { benchmarkEqual(b, Memcmp, size32K) }
+func BenchmarkMemcmp64K(b *testing.B)  { benchmarkEqual(b, Memcmp, size64K) }
+func BenchmarkMemcmp128K(b *testing.B) { benchmarkEqual(b, Memcmp, size128K) }
+func BenchmarkMemcmp256K(b *testing.B) { benchmarkEqual(b, Memcmp, size256K) }
+func BenchmarkMemcmp512K(b *testing.B) { benchmarkEqual(b, Memcmp, size512K) }
+func BenchmarkMemcmp1M(b *testing.B)   { benchmarkEqual(b, Memcmp, size1M) }
+func BenchmarkMemcmp2M(b *testing.B)   { benchmarkEqual(b, Memcmp, size2M) }
+func BenchmarkMemcmp4M(b *testing.B)   { benchmarkEqual(b, Memcmp, size4M) }
+func BenchmarkMemcmp8M(b *testing.B)   { benchmarkEqual(b, Memcmp, size8M) }
 func BenchmarkMemcmp16M(b *testing.B)  { benchmarkEqual(b, Memcmp, size16M) }
-func BenchmarkMemcmp1G(b *testing.B)  { benchmarkEqual(b, Memcmp, size1G) }
+func BenchmarkMemcmp1G(b *testing.B)   { benchmarkEqual(b, Memcmp, size1G) }
 
 func BenchmarkStrncmp1(b *testing.B)   { benchmarkEqual(b, Strncmp, 1) }
 func BenchmarkStrncmp1K(b *testing.B)  { benchmarkEqual(b, Strncmp, size1K) }
@@ -57,15 +61,15 @@ func BenchmarkStrncmp32K(b *testing.B) { benchmarkEqual(b, Strncmp, size32K) }
 func BenchmarkStrncmp1M(b *testing.B)  { benchmarkEqual(b, Strncmp, size1M) }
 func BenchmarkStrncmp1G(b *testing.B)  { benchmarkEqual(b, Strncmp, size1G) }
 
-func BenchmarkBytesEqual1(b *testing.B)   { benchmarkEqual(b, bytes.Equal, 1) }
-func BenchmarkBytesEqual1K(b *testing.B)  { benchmarkEqual(b, bytes.Equal, size1K) }
-func BenchmarkBytesEqual32K(b *testing.B) { benchmarkEqual(b, bytes.Equal, size32K) }
-func BenchmarkBytesEqual64K(b *testing.B) { benchmarkEqual(b, bytes.Equal, size64K) }
+func BenchmarkBytesEqual1(b *testing.B)    { benchmarkEqual(b, bytes.Equal, 1) }
+func BenchmarkBytesEqual1K(b *testing.B)   { benchmarkEqual(b, bytes.Equal, size1K) }
+func BenchmarkBytesEqual32K(b *testing.B)  { benchmarkEqual(b, bytes.Equal, size32K) }
+func BenchmarkBytesEqual64K(b *testing.B)  { benchmarkEqual(b, bytes.Equal, size64K) }
 func BenchmarkBytesEqual128K(b *testing.B) { benchmarkEqual(b, bytes.Equal, size128K) }
 func BenchmarkBytesEqual256K(b *testing.B) { benchmarkEqual(b, bytes.Equal, size256K) }
 func BenchmarkBytesEqual512K(b *testing.B) { benchmarkEqual(b, bytes.Equal, size512K) }
-func BenchmarkBytesEqual1M(b *testing.B)  { benchmarkEqual(b, bytes.Equal, size1M) }
-func BenchmarkBytesEqual1G(b *testing.B)  { benchmarkEqual(b, bytes.Equal, size1G) }
+func BenchmarkBytesEqual1M(b *testing.B)   { benchmarkEqual(b, bytes.Equal, size1M) }
+func BenchmarkBytesEqual1G(b *testing.B)   { benchmarkEqual(b, bytes.Equal, size1G) }
 
 func BenchmarkRuntimeMemequal1K(b *testing.B) {
 	var b1 [size1K]byte
